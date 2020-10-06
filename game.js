@@ -93,6 +93,7 @@ function resetGame() {
     bg.classList.remove("blur")
     popUp.classList.add("hid");
     progressBar.style.transform = `scaleX(0.0)`;
+    statement.textContent = `You have ${state.questionsLeft} questions to answer, and can answer ${3-state.wrongAnswers} wrongs.`;
     updateQuestion();
 }
 

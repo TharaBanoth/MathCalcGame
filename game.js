@@ -48,8 +48,7 @@ function formSub(e) {
 
     if(correctAnswer === userAnswer.valueAsNumber) {
         state.questionsLeft -= 1;
-        statement.textContent = `You have ${state.questionsLeft} questions to answer, and can answer ${state.wrongAnswers} wrongs.`;
-        console.log('correct');
+        statement.textContent = `You have ${state.questionsLeft} questions to answer, and can answer ${3-state.wrongAnswers} wrongs.`;
         progressBar.style.transform = `scaleX(0.${10 - state.questionsLeft})`;
 
         if(state.questionsLeft === 0) {
@@ -58,10 +57,9 @@ function formSub(e) {
         }
 
     } else {
-        console.log('not correct');
         state.wrongAnswers += 1;
         question.classList.add("error");
-        statement.textContent = `You have ${state.questionsLeft} questions to answer, and can answer ${state.wrongAnswers} wrongs.`;
+        statement.textContent = `You have ${state.questionsLeft} questions to answer, and can answer ${3-state.wrongAnswers} wrongs.`;
         setTimeout(() => { question.classList.remove("error"); }, 550);
         if(state.wrongAnswers === 3) {
             reset.focus();

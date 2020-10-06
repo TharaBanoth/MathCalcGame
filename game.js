@@ -44,7 +44,6 @@ function formSub(e) {
     if(q.operator === 'x') correctAnswer =  q.value1 *  q.value2;
     
     form.focus();
-    userAnswer.value = '';
 
     if(correctAnswer === userAnswer.valueAsNumber) {
         state.questionsLeft -= 1;
@@ -66,7 +65,7 @@ function formSub(e) {
             gameOver(false)
         }
     }
-
+    userAnswer.value = '';
     updateQuestion();
 }
 

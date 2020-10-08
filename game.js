@@ -9,9 +9,7 @@ const statement = document.querySelector(".statement");
 const gameStatus = document.querySelector(".game-status");
 const reset = document.querySelector(".overlay button");
 
-
 userAnswer.focus();
-
 
 let state = {
   wrongAnswers: 0,
@@ -44,10 +42,25 @@ function updateQuestion() {
   question.textContent = `${q.value1} ${q.operator} ${q.value2}`;
 }
 
+function updateStatement() {
+  let x = state.questionsLeft;
+  let y = state.wrongAnswers;
+  let message = `You have ${x} question`;
+  if (x > 1) {
+    message += `s`;
+  }
+  message += `  to answer<br>and can answer ${3 - y} wrong`;
+  if (3 - y > 1) {
+    message += `s`;
+  }
+  message += ".";
+  return message;
+}
+
 function formSub(e) {
   e.preventDefault();
   userAnswer.focus();
-  
+
   let q = state.currentQuestion;
   let correctAnswer;
 
@@ -59,9 +72,7 @@ function formSub(e) {
 
   if (correctAnswer === userAnswer.valueAsNumber) {
     state.questionsLeft -= 1;
-    statement.innerHTML = `You have ${
-      state.questionsLeft
-    } questions to answer<br>and can answer ${3 - state.wrongAnswers} wrongs.`;
+    statement.innerHTML = updateStatement();
     progressBar.style.transform = `scaleX(0.${10 - state.questionsLeft})`;
 
     if (state.questionsLeft === 0) {
@@ -71,9 +82,7 @@ function formSub(e) {
   } else {
     state.wrongAnswers += 1;
     question.classList.add("error");
-    statement.innerHTML = `You have ${
-      state.questionsLeft
-    } questions to answer<br>and can answer ${3 - state.wrongAnswers} wrongs.`;
+    statement.innerHTML = updateStatement();
     setTimeout(() => {
       question.classList.remove("error");
     }, 550);
@@ -90,7 +99,6 @@ function gameOver(won) {
   form.blur();
   userAnswer.blur();
 
-  
   bg.classList.add("blur");
   popUp.classList.remove("hid");
   progressBar.style.transform = `scaleX(0.0)`;
@@ -114,8 +122,8 @@ function resetGame() {
     state.questionsLeft
   } questions to answer<br>and can answer ${3 - state.wrongAnswers} wrongs.`;
   updateQuestion();
-  
-  userAnswer.focus()
+
+  userAnswer.focus();
 }
 
 // Events

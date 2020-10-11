@@ -132,3 +132,5 @@ reset.addEventListener("click", resetGame);
 
 // Function Calls
 updateQuestion();
+
+console.log("I've added a new awesome feature");
